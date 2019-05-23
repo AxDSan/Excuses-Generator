@@ -1,25 +1,38 @@
 <script>
-	import { onMount } from "svelte";
-	import CopyLink from "./CopyLink.svelte";
-	let count = 0;
-	let excuses = [
-	  "Got cramps, can't really do anything right now..",
-	  "My doctor told me I should rest at home.",
-	  "I need to do something in a few minutes, sorry."
-	];
-	let excuse = "";
+		import { onMount } from "svelte";
+		import CopyLink from "./CopyLink.svelte";
+		import axios from "axios";
+		let count = 0;
+		let excuses = [];
+		axios
+		  .get("https://us-central1-wfh-excuses-gh.cloudfunctions.net/wfh", {
+		    headers: { "Access-Control-Allow-Origin": "*" }
+		  })
+		  .then(function(response) {
+		    // handle success
+		    console.log(response);
+		  })
+		  .catch(function(error) {
+		    // handle error
+		    console.log(error);
+		  })
+		  .finally(function() {
+		    // always executed
+		  });
 
-	function handleClick() {
-	  excuse = excuses[Math.floor(Math.random() * excuses.length)];
-	}
+		let excuse = "";
 
-	onMount(() => {
-	  excuse = excuses[Math.floor(Math.random() * excuses.length)];
-	});
+		function handleClick() {
+		  excuse = excuses[Math.floor(Math.random() * excuses.length)];
+		}
+
+		onMount(() => {
+		  excuse = excuses[Math.floor(Math.random() * excuses.length)];
+		});
 </script>
 
 <style>
-	.msg_cotainer:before {
+	.msg_container:before {
 	  width: 0;
 	  height: 0;
 	  top: -5px;
@@ -29,7 +42,7 @@
 	  border-width: 0 13px 13px 0;
 	  border-color: transparent #ffffff transparent transparent;
 	}
-	.msg_cotainer {
+	.msg_container {
 	  font-family: "Lobster", cursive;
 	  font-size: 35px;
 	  margin-top: auto;
@@ -43,10 +56,10 @@
 </style>
 
 <div class="d-flex justify-content-center mb-5">
-	<div class="msg_cotainer">
+	<div class="msg_container">
 		<strong>{excuse}</strong>
 	</div>
-	<CopyLink/>
+	<CopyLink/>	
 </div>
 
 <button on:click={handleClick} class="btn btn-primary">
