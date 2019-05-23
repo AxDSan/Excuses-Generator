@@ -1,7 +1,7 @@
 <script>
 	import Button from "./Button.svelte";
 </script>
-<link href="https://fonts.googleapis.com/css?family=Lobster|Maven+Pro&display=swap" rel="stylesheet">
+
 <style>
   main {
     font-family: "Maven Pro", sans-serif;

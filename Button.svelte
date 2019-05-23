@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from "svelte";
+	import CopyLink from "./CopyLink.svelte";
 	let count = 0;
 	let excuses = [
 	  "Got cramps, can't really do anything right now..",
@@ -45,6 +46,7 @@
 	<div class="msg_cotainer">
 		<strong>{excuse}</strong>
 	</div>
+	<CopyLink/>
 </div>
 
 <button on:click={handleClick} class="btn btn-primary">
